@@ -18,6 +18,12 @@
       <input class="input" formControlName="descripcion" />
     </label>
 
+    @if (form.controls.descripcion.touched && form.controls.descripcion.invalid) {
+      <div class="error">
+        La descripción debe tener al menos 5 caracteres.
+      </div>
+    }
+
     <label class="check">
       <input type="checkbox" formControlName="completada" />
       Completada
