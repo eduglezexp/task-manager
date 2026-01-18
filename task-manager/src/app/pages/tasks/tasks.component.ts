@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TasksService } from '../../services/tasks.service';
+import { Task } from '../../models/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -9,6 +10,10 @@ import { TasksService } from '../../services/tasks.service';
 })
 export class TasksComponent {
   constructor(public tasksService: TasksService) {}
+
+  toggleCompleted(task: Task) {
+    this.tasksService.toggleCompleted(task);
+  }
 
   remove(id: number) {
     this.tasksService.remove(id);

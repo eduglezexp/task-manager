@@ -22,4 +22,11 @@ export class TasksService {
   remove(id: number): void {
     this.tasks = this.tasks.filter(t => t.id !== id);
   }
+
+  toggleCompleted(task: Task): void {
+    const index = this.tasks.findIndex(t => t.id === task.id);
+    if (index !== -1) {
+      this.tasks[index].completada = !this.tasks[index].completada;
+    }
+  }
 }
