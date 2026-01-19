@@ -27,8 +27,8 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-    const { username, password } = this.form.getRawValue();
-    this.auth.login(username, password).subscribe({
+    const data = this.form.getRawValue();
+    this.auth.login(data).subscribe({
       next: () => this.router.navigateByUrl('/'),
       error: () => {
         this.error = 'Usuario o contraseña incorrectos';
