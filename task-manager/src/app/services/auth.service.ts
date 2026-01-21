@@ -6,23 +6,28 @@ import { AuthRequest, AuthResponse } from '../models/auth.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private readonly TOKEN_KEY = 'token';
+  private readonly API = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
   login(request: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, request).pipe(
+    return this.http.post<AuthResponse>(`${this.API}/login`, request).pipe(
       tap(response => {
-        localStorage.setItem('token', 'Bearer ' + response.token);
+        localStorage.setItem(this.TOKEN_KEY, 'Bearer ' + response.token);
       })
     );
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.TOKEN_KEY);
   }
 
-  getToken() {
-    return localStorage.getItem('token');
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }

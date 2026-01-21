@@ -22,7 +22,7 @@ export class LoginComponent {
 
   error = '';
 
-  login() {
+  onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
